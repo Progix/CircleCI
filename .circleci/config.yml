@@ -1,13 +1,14 @@
 jobs:
   build:
     docker:
-    # Primary container image where all steps run.
-     - image: cimg/base:current
-    # Secondary container image on common network.
-     - image: cimg/mariadb:10.6
-       command: [mongod, --smallfiles]
+     - image: alpine
+
+    working_directory: /mnt/ramdisk
 
     steps:
-      # command will execute in an Ubuntu-based container
-      # and can access MariaDB on localhost
-      - run: sleep 5 && nc -vz localhost 3306
+      - run: |
+          echo '#!/bin/sh' > run.sh
+          echo 'echo Hello world!' >> run.sh
+          chmod +x run.sh
+      - run: ./run.sh
+
