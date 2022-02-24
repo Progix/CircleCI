@@ -2,11 +2,16 @@ version: 2.1
 orbs:
   newman: postman/newman@0.0.2
 jobs:
-  newman-collection-run-env-timeout:
-    executor: newman/postman-newman-docker
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
     steps:
-      - checkout
       - newman/newman-run:
-          collection: ./collection.json
-          environment: ./environment1.postman_environment.json
-          timeout: '1000'
+          collection: ./collection.json 
+          environment: dev_env.json 
+
+workflows:
+  example-workflow:
+    jobs:
+      - example-job
