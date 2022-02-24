@@ -1,14 +1,9 @@
 jobs:
   build:
     docker:
-     - image: alpine
-
-    working_directory: /mnt/ramdisk
+     - image: postman/newman
 
     steps:
       - run: |
-          echo '#!/bin/sh' > run.sh
-          echo 'echo Hello world!' >> run.sh
-          chmod +x run.sh
-      - run: ./run.sh
+          run "https://www.getpostman.com/collections/0d0350a9a89d39fb6361"
 
