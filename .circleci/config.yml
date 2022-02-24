@@ -1,9 +1,9 @@
 jobs:
   build:
-    docker:
-     - image: postman/newman
+    machine: true
 
     steps:
+      - checkout
       - run: |
-          run "https://www.getpostman.com/collections/0d0350a9a89d39fb6361"
+          docker run -t postman/newman run "https://www.getpostman.com/collections/0d0350a9a89d39fb6361"
 
